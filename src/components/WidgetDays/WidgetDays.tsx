@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import DayBtn from '../DayBtn/DayBtn';
 import styled from 'styled-components';
-import { RootState } from '../../redux/store/store';
 import { DayWeather } from '../../types/types';
+import { selectForecast } from '../../redux/selectors/selectors';
 
 const WidgetDaysContainer = styled.div`
   height: 143px;
 `;
 
 const WidgetDays:React.FC = () => {
-  const forecast = useSelector((state: RootState) => state.weather.forecast);
+  const forecast = useSelector(selectForecast);
 
   return (
     <WidgetDaysContainer>

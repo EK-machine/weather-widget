@@ -4,8 +4,8 @@ import Input from '../Input/Input';
 import Widget from '../Widget/Widget';
 import styled from 'styled-components';
 import { fetchWeather } from '../../redux/slices/weatherStateSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../redux/store/store';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store/store';
 import { validationSchema } from '../../helpers/helpers';
 
 const LayoutStyled = styled.div`

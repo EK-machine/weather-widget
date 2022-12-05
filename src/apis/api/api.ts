@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { AirQualityData, LatLonData, WeatherData } from '../../types/types';
 import { endpoints } from '../endpoints/endpoints'
 
