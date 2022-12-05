@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { RootState } from '../../redux/store/store';
-import { airQuality } from '../../helpers/helpersNData';
+import { airQuality } from '../../helpers/helpers';
 
 const HumWindAirStyled = styled.div`
   width: 50%;

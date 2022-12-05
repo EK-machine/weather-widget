@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { DayBtnProps } from '../../types/types';
-import { endpoints } from '../../apis/endpoints/endpoints';
-import { daysOfTheWeek, cutTemp, fToC } from '../../helpers/helpersNData';
+import { cutTemp, fToC, getDate } from '../../helpers/helpers';
+import { daysOfTheWeek } from '../../helpers/data';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/store';
 import { setActive } from '../../redux/slices/activeStateSlice';
+import { weatherService } from '../../apis/api/api';
 
 const DayBtnStyled = styled.button`
     height: 100%;
@@ -65,8 +66,7 @@ const DayBtn:React.FC<DayBtnProps> = ({max, min, timestamp, icon, ind}) => {
   const active = useSelector((state: RootState) => state.active.active);
   const isFar = useSelector((state: RootState) => state.farCel.far);
   const dispatch = useDispatch();
-  const date = new Date(timestamp * 1000);
-  const weekday = date.getDay();
+  const {weekday} = getDate(undefined, undefined, timestamp)
   const handleClick = () => {
     dispatch(setActive(ind))
   }
@@ -75,7 +75,7 @@ const DayBtn:React.FC<DayBtnProps> = ({max, min, timestamp, icon, ind}) => {
     <DayBtnStyled style={active === ind ? {backgroundColor: '#F7F7F7'}: {backgroundColor: 'transparent'}} onClick={handleClick}>
       <DayStyled>{daysOfTheWeek[weekday]}</DayStyled>
       <DayIconContStyled>
-        <DayIconStyled src={endpoints.weatherIcon(icon)} alt="weather icon" />
+        <DayIconStyled src={weatherService.getIcon(icon)} alt="weather icon" />
       </DayIconContStyled>
       <>
         <HighTemp>{isFar ? cutTemp(max) : cutTemp(fToC(max))}°</HighTemp>

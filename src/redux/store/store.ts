@@ -1,11 +1,9 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import latLonReducer from '../slices/latLonStateSlice';
 import weatherReducer from '../slices/weatherStateSlice';
 import activeReducer from '../slices/activeStateSlice';
 import farCelReducer from '../slices/farCelStateSlice';
 
 export const rootReducer = combineReducers({
-  latLon: latLonReducer,
   weather: weatherReducer,
   active: activeReducer,
   farCel: farCelReducer,

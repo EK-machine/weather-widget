@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import DayBtn from '../DayBtn/DayBtn';
 import styled from 'styled-components';
 import { RootState } from '../../redux/store/store';
+import { DayWeather } from '../../types/types';
 
 const WidgetDaysContainer = styled.div`
   height: 143px;
@@ -13,7 +14,7 @@ const WidgetDays:React.FC = () => {
 
   return (
     <WidgetDaysContainer>
-      {forecast.map((el, ind) => (
+      {forecast && (forecast as DayWeather[]).map((el, ind) => (
         <DayBtn key={el.dt}
           max={el.temp.max}
           min={el.temp.min}

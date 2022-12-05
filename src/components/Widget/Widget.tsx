@@ -40,17 +40,11 @@ const ErrorImg = styled.img`
 
 
 const Widget:React.FC = () => {
-  const latLonErr = useSelector((state: RootState) => state.latLon.error);
-  const weatherErr = useSelector((state: RootState) => state.weather.error);
-  console.log("latLonErr", latLonErr)
-  console.log("weatherErr", weatherErr)
-
-
-
-
+  const err = useSelector((state: RootState) => state.weather.error);
+  
   return (
     <WidgetContainer>
-      {latLonErr === "" && weatherErr === "" ? (
+      {!err ? (
         <>
           <WidgetData />
           <WidgetDays />
@@ -58,7 +52,7 @@ const Widget:React.FC = () => {
       ) : (
         <ErrorContainer>
           <ErrorImg src={Cloud} alt="err" />
-          <ErrorMessage>{latLonErr}</ErrorMessage>
+          <ErrorMessage>{err}</ErrorMessage>
         </ErrorContainer>
       )}
     </WidgetContainer>

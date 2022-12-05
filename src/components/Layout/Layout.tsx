@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Formik, FormikValues } from 'formik';
-import * as Yup from "yup";
 import Input from '../Input/Input';
 import Widget from '../Widget/Widget';
 import styled from 'styled-components';
-import { fetchLatLon } from '../../redux/slices/latLonStateSlice';
-import { fetchWeather, fetchAirQuality } from '../../redux/slices/weatherStateSlice';
+import { fetchWeather } from '../../redux/slices/weatherStateSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store/store';
+import { validationSchema } from '../../helpers/helpers';
 
 const LayoutStyled = styled.div`
   text-align: center;
@@ -16,7 +15,6 @@ const LayoutStyled = styled.div`
 `;
 
 const Layout:React.FC = () => {
-  const latLonCity = useSelector((state: RootState) => state.latLon);
   const dispatch = useDispatch<AppDispatch>();
 
   const initialValues = {
@@ -24,20 +22,8 @@ const Layout:React.FC = () => {
   };
   
   const onSubmit = (values: FormikValues) => {
-    dispatch(fetchLatLon(values.city));
+    dispatch(fetchWeather(values.city));
   };
-  
-  const validationSchema = Yup.object({
-    city: Yup.string().matches(/^[a-zA-Z]+$/ , 'We could not find weather information for the location above').required()
-  });
-
-  useEffect(() => {
-    if(latLonCity.city) {
-      const latLon = {lat: latLonCity.lat, lon: latLonCity.lon}
-      dispatch(fetchWeather(latLon));
-      dispatch(fetchAirQuality(latLon));
-    }
-  }, [latLonCity.city]);
 
   return (
     <LayoutStyled>

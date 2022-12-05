@@ -43,6 +43,27 @@ export interface CurrentWeather {
     wind_speed: number;
 }
 
+export interface WeatherResponse {
+    city: string;
+    country: string;
+    forecast: DayWeather[];
+    currentData: CurrentWeather;
+    airQuality: number;
+    status: string;
+    error: string;
+}
+
+export interface InitialState {
+    weatherRequest: boolean;
+    city: null | string;
+    country: null | string;
+    forecast: null | DayWeather[];
+    currentData: null | CurrentWeather;
+    airQuality: number;
+    status: null | string;
+    error: null | string;
+  };
+
 export interface LatLonCity {name: string; lat: number; lon: number; country: string}
 export interface LatLon {lat: number; lon: number}
 
